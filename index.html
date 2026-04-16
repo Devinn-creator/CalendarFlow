@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Time Management Planner</h1>
+
+  <div class="form">
+    <label>Daily Available Hours:</label>
+    <input type="number" id="hours" placeholder="e.g. 4">
+
+    <label>Your Goal:</label>
+    <input type="text" id="goal" placeholder="e.g. Learn coding">
+
+    <label>Total Hours Needed:</label>
+    <input type="number" id="goalHours" placeholder="e.g. 40">
+
+    <button onclick="generatePlan()">Generate Plan</button>
+  </div>
+
+  <div id="output"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
