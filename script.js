@@ -1,14 +1,9 @@
 let events = {};
 let selectedDate = new Date();
-let currentView = "dots";
+let view = "dots";
 
-/* UTIL */
 function format(d) {
   return d.toISOString().split("T")[0];
-}
-
-function daysInMonth(d) {
-  return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
 }
 
 /* ADD GOALS */
@@ -31,33 +26,39 @@ document.getElementById("addBtn").onclick = () => {
   render();
 };
 
-/* DOT VIEW */
+/* DOT CALENDAR */
 function renderDots() {
   const cal = document.getElementById("calendar");
   cal.className = "dots";
   cal.innerHTML = "";
 
-  let total = daysInMonth(selectedDate);
-  let y = selectedDate.getFullYear();
-  let m = selectedDate.getMonth();
+  let year = selectedDate.getFullYear();
+  let month = selectedDate.getMonth();
+  let days = new Date(year, month + 1, 0).getDate();
 
-  for (let i = 1; i <= total; i++) {
-    let d = new Date(y, m, i);
+  for (let i = 1; i <= days; i++) {
+    let d = new Date(year, month, i);
     let key = format(d);
 
-    let el = document.createElement("div");
-    el.className = "dot";
-    el.innerText = i;
+    let dot = document.createElement("div");
+    dot.className = "dot";
+    dot.innerText = i;
 
-    if (events[key]) el.classList.add("has-event");
-    if (key === format(selectedDate)) el.classList.add("active");
+    if (events[key]) dot.classList.add("has-event");
+    if (key === format(selectedDate)) dot.classList.add("active");
 
-    el.onclick = () => {
+    /* TOOLTIP */
+    let tip = document.createElement("div");
+    tip.className = "tooltip";
+    tip.innerHTML = (events[key] || []).join("<br>") || "No events";
+    dot.appendChild(tip);
+
+    dot.onclick = () => {
       selectedDate = d;
       render();
     };
 
-    cal.appendChild(el);
+    cal.appendChild(dot);
   }
 }
 
@@ -77,12 +78,10 @@ function renderWeek() {
 
     let div = document.createElement("div");
     div.className = "day";
-
     div.innerHTML = `
       <strong>${d.toDateString()}</strong>
       <ul>${(events[key] || []).map(e => `<li>${e}</li>`).join("")}</ul>
     `;
-
     cal.appendChild(div);
   }
 }
@@ -108,13 +107,14 @@ function renderInsights() {
 
   const affirmations = [
     "Stay consistent",
-    "Progress matters",
-    "Keep going"
+    "Progress compounds daily",
+    "You are building momentum"
   ];
 
   const wisdom = [
-    "Aristotle: Excellence is habit",
-    "Nietzsche: Purpose drives action"
+    "Aristotle: Excellence is a habit",
+    "Nietzsche: He who has a why can bear any how",
+    "Socrates: Know thyself"
   ];
 
   document.getElementById("affirmation").innerText =
@@ -137,23 +137,22 @@ document.getElementById("next").onclick = () => {
 
 /* VIEW SWITCH */
 document.getElementById("dotsBtn").onclick = () => {
-  currentView = "dots";
+  view = "dots";
   render();
 };
 
 document.getElementById("weekBtn").onclick = () => {
-  currentView = "week";
+  view = "week";
   render();
 };
 
-/* MAIN RENDER */
+/* MAIN */
 function render() {
-  if (currentView === "dots") renderDots();
+  if (view === "dots") renderDots();
   else renderWeek();
 
   renderCard();
   renderInsights();
 }
 
-/* INIT */
 render();
