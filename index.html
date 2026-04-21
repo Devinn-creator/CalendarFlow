@@ -11,10 +11,6 @@
 
   <header>
     <h1>FlowPlanner</h1>
-    <div class="toggle">
-      <button id="dotsBtn">Dots</button>
-      <button id="weekBtn">Week</button>
-    </div>
   </header>
 
   <section class="input">
@@ -23,27 +19,14 @@
     <button id="addBtn">Add</button>
   </section>
 
-  <section id="calendar"></section>
+  <!-- DOT CALENDAR -->
+  <section id="calendar" class="dots"></section>
 
+  <!-- COVER FLOW (SINGLE CARD) -->
   <section class="coverflow">
     <button id="prev">‹</button>
-    <div id="flow"></div>
+    <div id="card"></div>
     <button id="next">›</button>
-  </section>
-
-  <section class="insights">
-    <div>
-      <h3>Today</h3>
-      <ul id="todayList"></ul>
-    </div>
-    <div>
-      <h3>Affirmation</h3>
-      <p id="affirmation"></p>
-    </div>
-    <div>
-      <h3>Daily Wisdom</h3>
-      <p id="wisdom"></p>
-    </div>
   </section>
 
 </div>
