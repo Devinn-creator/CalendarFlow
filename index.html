@@ -12,40 +12,43 @@
   <header>
     <h1>FlowPlanner</h1>
     <div class="toggle">
-      <button id="monthBtn">Dots</button>
+      <button id="dotsBtn">Dots</button>
       <button id="weekBtn">Week</button>
     </div>
   </header>
 
+  <!-- INPUT -->
   <section class="input">
-    <input id="goal" placeholder="What do you want to accomplish?" />
+    <textarea id="goalInput" placeholder="Enter goals (one per line)"></textarea>
     <input type="date" id="deadline" />
-    <button id="add">Add</button>
+    <button id="addBtn">Add Goals</button>
   </section>
 
-  <section id="calendar" class="calendar"></section>
+  <!-- CALENDAR -->
+  <section id="calendar"></section>
 
-  <!-- Cover Flow Viewer -->
+  <!-- COVER FLOW -->
   <section class="coverflow">
     <button id="prev">‹</button>
-    <div id="flowContainer"></div>
+    <div id="flow"></div>
     <button id="next">›</button>
   </section>
 
+  <!-- INSIGHTS -->
   <section class="insights">
     <div>
       <h3>Today</h3>
-      <div id="today"></div>
+      <ul id="todayList"></ul>
     </div>
 
     <div>
       <h3>Affirmation</h3>
-      <div id="affirmation"></div>
+      <p id="affirmation"></p>
     </div>
 
     <div>
       <h3>Daily Wisdom</h3>
-      <div id="wisdom"></div>
+      <p id="wisdom"></p>
     </div>
   </section>
 
