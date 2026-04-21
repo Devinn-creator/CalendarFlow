@@ -12,6 +12,64 @@
   <header>
     <h1>FlowPlanner</h1>
     <div class="toggle">
+      <button id="monthBtn">Dots</button>
+      <button id="weekBtn">Week</button>
+    </div>
+  </header>
+
+  <section class="input">
+    <input id="goal" placeholder="What do you want to accomplish?" />
+    <input type="date" id="deadline" />
+    <button id="add">Add</button>
+  </section>
+
+  <section id="calendar" class="calendar"></section>
+
+  <!-- Cover Flow Viewer -->
+  <section class="coverflow">
+    <button id="prev">‹</button>
+    <div id="flowContainer"></div>
+    <button id="next">›</button>
+  </section>
+
+  <section class="insights">
+    <div>
+      <h3>Today</h3>
+      <div id="today"></div>
+    </div>
+
+    <div>
+      <h3>Affirmation</h3>
+      <div id="affirmation"></div>
+    </div>
+
+    <div>
+      <h3>Daily Wisdom</h3>
+      <div id="wisdom"></div>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FlowPlanner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>FlowPlanner</h1>
+    <div class="toggle">
       <button id="dotsBtn">Dots</button>
       <button id="weekBtn">Week</button>
     </div>
