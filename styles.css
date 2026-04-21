@@ -6,16 +6,32 @@ body {
 }
 
 .app {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   padding: 24px;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle button {
+  background: #1f2937;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
 }
 
 /* INPUT */
 .input {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 textarea {
@@ -40,11 +56,10 @@ button {
 }
 
 /* DOT CALENDAR */
-.dots {
+#calendar.dots {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 14px;
-  margin-bottom: 30px;
 }
 
 .dot {
@@ -56,8 +71,7 @@ button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  position: relative;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s;
 }
 
 .dot:hover {
@@ -79,12 +93,30 @@ button {
   border-radius: 50%;
 }
 
+/* WEEK VIEW */
+#calendar.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.day {
+  background: #1f2937;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.day ul {
+  padding-left: 16px;
+}
+
 /* COVER FLOW */
 .coverflow {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  margin: 30px 0;
 }
 
 #card {
@@ -93,13 +125,17 @@ button {
   background: #1f2937;
   border-radius: 16px;
   padding: 16px;
-  transition: 0.3s ease;
 }
 
-#card h3 {
-  margin-top: 0;
+/* INSIGHTS */
+.insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
 
-#card ul {
-  padding-left: 18px;
+.insights div {
+  background: #1f2937;
+  padding: 15px;
+  border-radius: 12px;
 }
