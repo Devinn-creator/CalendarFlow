@@ -1,21 +1,21 @@
 let events = {};
-let selectedDateIndex = 0;
+let currentIndex = 3;
 let dates = [];
 
 const affirmations = [
   "Stay consistent.",
-  "You are building momentum.",
-  "Focus on progress.",
-  "You’re in control."
+  "Small steps compound.",
+  "You are progressing.",
+  "Keep showing up."
 ];
 
 const wisdom = [
-  "Aristotle: We are what we repeatedly do.",
-  "Nietzsche: He who has a why can bear any how.",
+  "Aristotle: Excellence is habit.",
+  "Nietzsche: He who has a why...",
   "Socrates: Know thyself."
 ];
 
-function formatDate(d) {
+function format(d) {
   return d.toISOString().split("T")[0];
 }
 
@@ -26,18 +26,20 @@ function generateDates() {
   for (let i = -3; i <= 3; i++) {
     let d = new Date();
     d.setDate(now.getDate() + i);
-    dates.push(formatDate(d));
+    dates.push(format(d));
   }
 }
 
-function addGoal(goal, deadline) {
+function addGoals(text, deadline) {
+  let goals = text.split("\n").filter(g => g.trim() !== "");
   let start = new Date();
   let end = new Date(deadline);
 
   while (start <= end) {
-    let key = formatDate(start);
+    let key = format(start);
     if (!events[key]) events[key] = [];
-    events[key].push(goal);
+
+    goals.forEach(g => events[key].push(g));
 
     start.setDate(start.getDate() + 1);
   }
@@ -45,37 +47,31 @@ function addGoal(goal, deadline) {
   render();
 }
 
-document.getElementById("add").onclick = () => {
-  let goal = document.getElementById("goal").value;
+document.getElementById("addBtn").onclick = () => {
+  let text = document.getElementById("goalInput").value;
   let deadline = document.getElementById("deadline").value;
-  if (goal && deadline) addGoal(goal, deadline);
+  if (text && deadline) addGoals(text, deadline);
 };
 
-document.getElementById("monthBtn").onclick = () => renderDots();
-document.getElementById("weekBtn").onclick = () => renderWeek();
-
+/* DOT VIEW */
 function renderDots() {
   const cal = document.getElementById("calendar");
-  cal.className = "calendar dots";
+  cal.className = "dots";
   cal.innerHTML = "";
 
   for (let i = 1; i <= 30; i++) {
     let d = new Date();
     d.setDate(i);
-    let key = formatDate(d);
+    let key = format(d);
 
     let el = document.createElement("div");
-    el.className = "day-dot";
+    el.className = "dot";
     el.innerText = i;
 
-    if (events[key]) {
-      let dot = document.createElement("div");
-      dot.className = "event-indicator";
-      el.appendChild(dot);
-    }
+    if (events[key]) el.classList.add("active");
 
     el.onclick = () => {
-      selectedDateIndex = 3;
+      currentIndex = 3;
       generateDates();
       renderFlow();
     };
@@ -84,65 +80,75 @@ function renderDots() {
   }
 }
 
+/* WEEK VIEW */
 function renderWeek() {
   const cal = document.getElementById("calendar");
-  cal.className = "calendar week";
+  cal.className = "week";
   cal.innerHTML = "";
 
   for (let i = 0; i < 7; i++) {
     let d = new Date();
     d.setDate(d.getDate() + i);
-    let key = formatDate(d);
+    let key = format(d);
 
-    let el = document.createElement("div");
-    el.className = "day-box";
-    el.innerHTML = `<strong>${d.toDateString()}</strong><br>${
-      (events[key] || []).join("<br>") || ""
-    }`;
+    let div = document.createElement("div");
+    div.className = "day";
 
-    cal.appendChild(el);
+    let list = (events[key] || [])
+      .map(e => `<li>${e}</li>`)
+      .join("");
+
+    div.innerHTML = `
+      <strong>${d.toDateString()}</strong>
+      <ul>${list}</ul>
+    `;
+
+    cal.appendChild(div);
   }
 }
 
+/* COVER FLOW */
 function renderFlow() {
-  const container = document.getElementById("flowContainer");
-  container.innerHTML = "";
+  const flow = document.getElementById("flow");
+  flow.innerHTML = "";
 
   dates.forEach((d, i) => {
     let card = document.createElement("div");
-    card.className = "flow-card";
+    card.className = "card";
+    if (i === currentIndex) card.classList.add("active");
 
-    if (i === selectedDateIndex) card.classList.add("active");
+    let list = (events[d] || [])
+      .map(e => `<li>${e}</li>`)
+      .join("");
 
     card.innerHTML = `
-      <strong>${d}</strong><br>
-      ${(events[d] || []).join("<br>") || "No tasks"}
+      <strong>${d}</strong>
+      <ul>${list}</ul>
     `;
 
-    container.appendChild(card);
+    flow.appendChild(card);
   });
 
   updateInsights();
 }
 
 document.getElementById("prev").onclick = () => {
-  if (selectedDateIndex > 0) {
-    selectedDateIndex--;
-    renderFlow();
-  }
+  if (currentIndex > 0) currentIndex--;
+  renderFlow();
 };
 
 document.getElementById("next").onclick = () => {
-  if (selectedDateIndex < dates.length - 1) {
-    selectedDateIndex++;
-    renderFlow();
-  }
+  if (currentIndex < dates.length - 1) currentIndex++;
+  renderFlow();
 };
 
+/* INSIGHTS */
 function updateInsights() {
-  let today = dates[selectedDateIndex];
-  document.getElementById("today").innerHTML =
-    (events[today] || []).join("<br>") || "No events";
+  let today = dates[currentIndex];
+  let list = events[today] || [];
+
+  document.getElementById("todayList").innerHTML =
+    list.map(i => `<li>${i}</li>`).join("");
 
   document.getElementById("affirmation").innerText =
     affirmations[Math.floor(Math.random() * affirmations.length)];
@@ -150,6 +156,10 @@ function updateInsights() {
   document.getElementById("wisdom").innerText =
     wisdom[Math.floor(Math.random() * wisdom.length)];
 }
+
+/* INIT */
+document.getElementById("dotsBtn").onclick = renderDots;
+document.getElementById("weekBtn").onclick = renderWeek;
 
 generateDates();
 renderDots();
