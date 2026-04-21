@@ -1,50 +1,75 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: #0f172a;
-  color: white;
+  color: #fff;
+}
+
+.app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
   display: flex;
-  justify-content: center;
-  padding: 40px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.container {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 12px;
-  width: 350px;
+.controls button {
+  margin-left: 10px;
 }
 
-h1 {
-  text-align: center;
+.input-section {
+  margin: 20px 0;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: 15px;
-  padding: 10px;
+input, button {
+  padding: 8px;
+  margin-right: 5px;
   border-radius: 6px;
   border: none;
 }
 
-button {
-  padding: 10px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #0ea5e9;
-}
-
-#output {
+.calendar {
+  display: grid;
+  gap: 10px;
   margin-top: 20px;
-  background: #020617;
+}
+
+.month-view {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.week-view {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  min-height: 60px;
+  position: relative;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.summary {
+  margin-top: 30px;
+  background: #1e293b;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+
+h2, h3 {
+  margin-top: 10px;
 }
