@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Time Planner</title>
+  <title>FlowPlanner</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -10,30 +10,43 @@
 <div class="app">
 
   <header>
-    <h1>Time Planner</h1>
-    <div class="controls">
-      <button id="monthViewBtn">Month View</button>
-      <button id="weekViewBtn">Week View</button>
+    <h1>FlowPlanner</h1>
+    <div class="toggle">
+      <button id="monthBtn">Dots</button>
+      <button id="weekBtn">Week</button>
     </div>
   </header>
 
-  <section class="input-section">
-    <input type="text" id="goalInput" placeholder="Enter a goal..." />
-    <input type="date" id="deadlineInput" />
-    <button id="addGoalBtn">Add Goal</button>
+  <section class="input">
+    <input id="goal" placeholder="What do you want to accomplish?" />
+    <input type="date" id="deadline" />
+    <button id="add">Add</button>
   </section>
 
-  <section class="calendar" id="calendar"></section>
+  <section id="calendar" class="calendar"></section>
 
-  <section class="summary">
-    <h2>Today</h2>
-    <div id="todaySummary"></div>
+  <!-- Cover Flow Viewer -->
+  <section class="coverflow">
+    <button id="prev">‹</button>
+    <div id="flowContainer"></div>
+    <button id="next">›</button>
+  </section>
 
-    <h3>Affirmation</h3>
-    <div id="affirmation"></div>
+  <section class="insights">
+    <div>
+      <h3>Today</h3>
+      <div id="today"></div>
+    </div>
 
-    <h3>Daily Wisdom</h3>
-    <div id="wisdom"></div>
+    <div>
+      <h3>Affirmation</h3>
+      <div id="affirmation"></div>
+    </div>
+
+    <div>
+      <h3>Daily Wisdom</h3>
+      <div id="wisdom"></div>
+    </div>
   </section>
 
 </div>
