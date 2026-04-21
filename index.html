@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Time Planner</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div class="container">
-  <h1>Time Management Planner</h1>
+<div class="app">
 
-  <div class="form">
-    <label>Daily Available Hours:</label>
-    <input type="number" id="hours" placeholder="e.g. 4">
+  <header>
+    <h1>Time Planner</h1>
+    <div class="controls">
+      <button id="monthViewBtn">Month View</button>
+      <button id="weekViewBtn">Week View</button>
+    </div>
+  </header>
 
-    <label>Your Goal:</label>
-    <input type="text" id="goal" placeholder="e.g. Learn coding">
+  <section class="input-section">
+    <input type="text" id="goalInput" placeholder="Enter a goal..." />
+    <input type="date" id="deadlineInput" />
+    <button id="addGoalBtn">Add Goal</button>
+  </section>
 
-    <label>Total Hours Needed:</label>
-    <input type="number" id="goalHours" placeholder="e.g. 40">
+  <section class="calendar" id="calendar"></section>
 
-    <button onclick="generatePlan()">Generate Plan</button>
-  </div>
+  <section class="summary">
+    <h2>Today</h2>
+    <div id="todaySummary"></div>
 
-  <div id="output"></div>
+    <h3>Affirmation</h3>
+    <div id="affirmation"></div>
+
+    <h3>Daily Wisdom</h3>
+    <div id="wisdom"></div>
+  </section>
+
 </div>
 
 <script src="script.js"></script>
